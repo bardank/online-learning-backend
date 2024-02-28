@@ -1,5 +1,4 @@
 import { type ObjectId } from "mongoose";
-import { type INSTITUTION_TYPE } from "./institutionType";
 import { type Role } from "./roles";
 
 export interface User {
@@ -13,24 +12,3 @@ export interface User {
   accessToken: string;
 }
 
-export interface AffiliatedBy {
-  label: string;
-  link: string;
-}
-export interface Institution {
-  _id: ObjectId;
-  name: string;
-  slug: string;
-  address: string;
-  phone: string[];
-  ownership: string;
-  established: string;
-  email: string;
-  programs: string[];
-  website: string;
-  affiliatedBy: AffiliatedBy[];
-  logo: string;
-  about: string;
-  location: string;
-  institutionType: INSTITUTION_TYPE;
-}

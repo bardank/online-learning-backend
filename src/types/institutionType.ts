@@ -1,9 +1,0 @@
-export enum INSTITUTION_TYPE {
-  UNIVERSITY = "UNIVERSITY",
-  COLLEGE = "COLLEGE",
-  SCHOOL = "SCHOOL",
-  COACHING = "COACHING",
-  TRAINING = "TRAINING",
-}
-
-export type Institution_type = `${INSTITUTION_TYPE}`;
