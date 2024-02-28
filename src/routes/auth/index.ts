@@ -1,7 +1,13 @@
-import { type NextFunction, type Request, type Response, Router } from "express";
+import {
+  type NextFunction,
+  type Request,
+  type Response,
+  Router,
+} from "express";
 import { catchAsync } from "../../utils/catchAsync";
 import authService from "../../services/auth/";
 import { type LoginPayload, type RegisterPayload } from "../../types/auth";
+import validator from "../../middlewares/validator.middleware";
 const router = Router();
 
 interface LoginRequest extends Request {
@@ -23,6 +29,7 @@ interface RegisterRequest extends Request {
 
 router.post(
   "/register",
+  validator({ body: "RegisterUserBody" }),
   catchAsync(
     async (req: RegisterRequest, res: Response, next: NextFunction) => {
       const { name, email, password } = req.body;
