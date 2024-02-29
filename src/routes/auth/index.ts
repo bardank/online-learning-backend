@@ -8,6 +8,8 @@ import { catchAsync } from "../../utils/catchAsync";
 import authService from "../../services/auth/";
 import { type LoginPayload, type RegisterPayload } from "../../types/auth";
 import validator from "../../middlewares/validator.middleware";
+import verifyTokenMiddleware from "../../middlewares/verifyToken";
+import userService from "../../services/user";
 const router = Router();
 
 interface LoginRequest extends Request {
@@ -38,6 +40,15 @@ router.post(
       return res.status(200).json({ user });
     }
   )
+);
+
+router.get(
+  "/me",
+  verifyTokenMiddleware,
+  catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    const user = await userService.findOneById(req.user!.id);
+    return res.status(200).json({ user });
+  })
 );
 
 export default router;

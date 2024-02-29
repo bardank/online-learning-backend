@@ -10,10 +10,12 @@ export const UserSchema = new Schema<User>(
     password: {
       type: String,
       required: false,
+      select: false,
     },
     salt: {
       type: String,
       required: true,
+      select: false,
     },
     profilePicture: { type: String, required: false },
     role: {

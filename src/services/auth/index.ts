@@ -18,7 +18,7 @@ const login = async (
     type: "BAD_REQUEST",
     message: "Invalid credentials!",
   };
-  const user = await userService.findOneByEmail(email);
+  const user = await userService.findOneByEmail(email, true);
   if (!user) {
     throw new HttpError({
       code: 403,
@@ -44,7 +44,7 @@ const register = async (
   name: string,
   email: string,
   password: string
-):  Promise<{ token: string; role: string }> => {
+): Promise<{ token: string; role: string }> => {
   const validatedUser = await userService.findOneByEmail(email);
   if (validatedUser) {
     throw new HttpError({
@@ -71,7 +71,7 @@ const register = async (
   return {
     token: getToken(user._id as unknown as string, user.email),
     role: user.role.label,
-  };;
+  };
 };
 
 const authService = {
