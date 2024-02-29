@@ -1,9 +1,14 @@
+import { ScopeList } from "./scope";
+
 export enum ROLES {
-  ADMIN = "ADMIN",
-  CLIENT = "CLIENT",
-  GUEST = "GUEST",
-  SUPER_ADMIN = "SUPER_ADMIN",
-  USER = "USER",
+  SUPER_ADMIN = 0,
+  ADMIN = 1,
+  TEACHER = 2,
+  STUDENT = 3,
 }
 
-export type Role = `${ROLES}`;
+export interface Role {
+  id: ROLES;
+  label: string;
+  scopes: ScopeList[];
+}

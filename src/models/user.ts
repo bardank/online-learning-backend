@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
 import { type User } from "../types/models";
-import { ROLES } from "../types/roles";
+import { ROLES, Role } from "../types/roles";
+import Roles from "../configs/roles";
 
 export const UserSchema = new Schema<User>(
   {
@@ -16,9 +17,10 @@ export const UserSchema = new Schema<User>(
     },
     profilePicture: { type: String, required: false },
     role: {
-      type: String,
-      default: ROLES.CLIENT,
-    },
+      type: Number,
+      default: 3,
+      get: getRole,
+    } as unknown as Role,
     accessToken: {
       type: String,
       required: false,
@@ -27,8 +29,18 @@ export const UserSchema = new Schema<User>(
   },
   {
     timestamps: true,
+    toJSON: {
+      getters: true,
+    },
+    toObject: {
+      getters: true,
+    },
   }
 );
+
+function getRole(roleId: number): Role {
+  return Roles.getRole(roleId);
+}
 
 export const UserModel = model("User", UserSchema, "users");
 

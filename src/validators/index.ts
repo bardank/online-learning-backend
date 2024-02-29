@@ -1,3 +1,3 @@
-import { RegisterUserBody } from "./auth";
+import { LoginUserBody, RegisterUserBody } from "./auth";
 
-export default { RegisterUserBody };
+export default { RegisterUserBody, LoginUserBody };
